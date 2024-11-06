@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Homepage - Placement Cell</title>
+    <style>
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1c7530;
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 20px;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff;
+    margin: 20px auto;
+}
+
+.welcome-section h1 {
+    font-size: 36px;
+}
+
+.welcome-section button {
+    padding: 1px 20px;
+    background-color: #1c7530;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.welcome-section button:hover {
+    background-color: #165c25;
+}
+
+/* Dashboard Overview */
+.dashboard-overview {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #407b6055;
+}
+
+.card {
+    flex: 1;
+    padding: 20px;
+    margin: 0 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+/* Job Listings */
+.jobs-listing {
+    padding: 20px;
+    background-color: #fff;
+    margin: 20px auto;
+}
+
+.jobs-listing h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #1c7530;
+    color: white;
+}
+
+button.apply-btn {
+    padding: 5px 10px;
+    background-color: #1c7530;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button.apply-btn:hover {
+    background-color: #165c25;
+}
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo" >PCMS STUDENT DASHBOARD</div>
+        <nav>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Available Jobs</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="user-avatar.png" alt="User Avatar" class="avatar">
+            <span>Prabha</span>
+        </div>
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <h1>Welcome, Prabha!</h1>
+        <p>Get ready for your next career move with the latest job opportunities!<br></p>
+        <button onclick="showJobs()">Explore Job Opportunities</button>
+    </section>
+
+    <!-- Dashboard Overview -->
+    <section class="dashboard-overview">
+        <div class="card">
+            <h3>Job Applications</h3>
+            <p>Pending: 3 | Accepted: 1</p>
+        </div>
+        <div class="card">
+            <h3>Upcoming Deadline</h3>
+            <p>PK Solutions - 4 days left</p>
+        </div>
+        <div class="card">
+            <h3>Announcements</h3>
+            <p>Next drive: SM cloud - Oct 25th</p>
+        </div>
+    </section>
+
+    <!-- Available Jobs -->
+    <section class="jobs-listing">
+        <h2>Available Jobs</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Position</th>
+                    <th>Location</th>
+                    <th>Eligibility</th>
+                    <th>Deadline</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="jobsTable">
+                <!-- Job rows will be inserted via JavaScript -->
+            </tbody>
+        </table>
+        
+    </section>
+    <footer class="container-fluid p-2 text-bg-success text-white text-center">
+        <p class="display-5" style="font-family: Lato; font-size: large;"> &copy; 2024 Placement Cell </p>
+      </footer>
+    <script>
+// Sample job data
+const jobs = [
+    { company: 'XY-TECH', position: 'Software Engineer', location: 'California, USA', eligibility: 'B.E/B.Tech', deadline: 'Oct 30, 2024' },
+    { company: 'PK Solutions', position: 'Data Analyst', location: 'Seattle, USA', eligibility: 'B.E/B.Tech', deadline: 'Oct 25, 2024' },
+    { company: 'TH Technologies', position: 'Cloud Engineer', location: 'Bangalore, India', eligibility: 'B.E/B.Tech', deadline: 'Nov 10, 2024' }
+];
+
+// Function to load jobs
+function showJobs() {
+    const jobsTable = document.getElementById('jobsTable');
+    
+    jobs.forEach(job => {
+        const row = `
+            
+            <tr>
+                <td>${job.company}</td>
+                <td>${job.position}</td>
+                <td>${job.location}</td>
+                <td>${job.eligibility}</td>
+                <td>${job.deadline}</td>
+                <td><button class="apply-btn">Apply</button></td>
+            </tr>
+        `;
+        jobsTable.innerHTML += row;
+    });
+}
+
+// Load jobs when the page loads
+// window.onload = showJobs;
+
+</script>
+</body>
+</html>
